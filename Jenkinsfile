@@ -1,5 +1,7 @@
 pipeline {
-    agent any
+    agent {
+        docker { image 'node:18' }  // official Node.js Docker image
+    }
 
     stages {
         stage('Checkout') {
@@ -19,16 +21,10 @@ pipeline {
                 sh 'npm test'
             }
         }
-
-       
     }
 
     post {
-        success {
-            echo "Pipeline completed successfully!"
-        }
-        failure {
-            echo "Pipeline failed. Check the logs!"
-        }
+        success { echo "Pipeline completed successfully!" }
+        failure { echo "Pipeline failed. Check the logs!" }
     }
 }
