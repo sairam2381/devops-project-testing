@@ -1,11 +1,13 @@
 pipeline {
     agent any
 
-    tools {
-        nodejs "node16"   // name you configured in Jenkins
-    }
-
     stages {
+        stage('Checkout') {
+            steps {
+                git 'https://github.com/sairam2381/devops-project-testing.git'
+            }
+        }
+
         stage('Install Dependencies') {
             steps {
                 sh 'npm install'
@@ -17,11 +19,11 @@ pipeline {
                 sh 'npm test'
             }
         }
-    }
 
-    post {
-        always {
-            junit 'reports/junit/*.xml'
+        stage('Build') {
+            steps {
+                sh 'npm run build'
+            }
         }
     }
 }
