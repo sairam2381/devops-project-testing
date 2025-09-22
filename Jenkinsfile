@@ -5,7 +5,7 @@ pipeline {
             steps {
                 git 'https://github.com/sairam2381/devops-project-testing.git'
             }
-        }
+        }//
         stage('Install Dependencies') {
             steps {
                 sh 'npm install'
